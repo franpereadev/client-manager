@@ -1,13 +1,23 @@
 export interface ISideBarLink {
-	icon: string;
+	icon: any;
 	name: string;
-	link: string;
+	url: string;
 }
 const sideBarLinks: ISideBarLink[] = [
 	{
-		icon: "test",
+		icon: "house",
+		name: "Dashboard",
+		url: "/",
+	},
+	{
+		icon: "user-group",
 		name: "Clients",
-		link: "/clients",
+		url: "/clients",
+	},
+	{
+		icon: "dumbbell",
+		name: "Tasks",
+		url: "/tasks",
 	},
 ];
 
