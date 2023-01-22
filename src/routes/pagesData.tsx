@@ -1,5 +1,5 @@
-import Dashboard from "../layout/dashboard";
-import Clients from "../pages/clients";
+import Dashboard from "../features/dashboard/Dashboard";
+import Clients from "../features/dashboard/clients/components/Clients";
 
 export interface IPageRoute {
 	key: string;
