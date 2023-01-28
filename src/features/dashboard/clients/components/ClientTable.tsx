@@ -1,20 +1,28 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../app/hooks";
+import Modal from "../../../shared/components/Modal";
 import ToggleButton from "../../../shared/components/ToggleButton";
 import { Client } from "../client";
 import { updateClientById } from "../clientSlice";
+import ClientForm from "./ClientForm";
 
 function ClientTable() {
-	const clientState = useAppSelector((state) => state.clients);
-	console.log(clientState);
 	const dispatch = useDispatch();
+	const clientState = useAppSelector((state) => state.clients);
 
-	function handleToggleChange(value: boolean, id: string) {
+	const [clientFormShow, setClientFormShow] = useState(false);
+
+	function handleToggleStatusChange(value: boolean, id: string) {
 		console.log(value, id);
 		let currentClient = clientState.value.find((c) => c.id == id);
 		dispatch(updateClientById({ ...currentClient, show: value, id: id }));
 	}
+	function handleToggleClientForm(val?: any) {
+		setClientFormShow(!clientFormShow);
+	}
+
 	return (
 		<>
 			<div>
@@ -30,6 +38,7 @@ function ClientTable() {
 						<button
 							type="button"
 							className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-button px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+							onClick={() => setClientFormShow(!clientFormShow)}
 						>
 							Add client
 						</button>
@@ -64,7 +73,7 @@ function ClientTable() {
 												scope="col"
 												className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
 											>
-												Role
+												Summary
 											</th>
 											<th
 												scope="col"
@@ -83,13 +92,13 @@ function ClientTable() {
 															<div className="h-10 w-10 flex-shrink-0">
 																<img
 																	className="h-10 w-10 rounded-full"
-																	src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+																	src={require("../../../../assets/profile.png")}
 																	alt=""
 																/>
 															</div>
 															<div className="ml-4">
 																<div className="font-medium text-gray-900">
-																	{client.name} {client.surname}
+																	{client.name} {client.lastName}
 																</div>
 																<div className="text-gray-500">
 																	{client.email}
@@ -98,17 +107,17 @@ function ClientTable() {
 														</div>
 													</td>
 													<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-														<div className="text-gray-900">{client.phone}</div>
+														<div className="text-gray-900">{client.mobile}</div>
 													</td>
 													<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 														<ToggleButton
 															defaultValue={client.show}
-															onToggleChange={handleToggleChange}
+															onToggleChange={handleToggleStatusChange}
 															targetId={client.id}
 														/>
 													</td>
-													<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-														Member
+													<td className="lpx-3 py-4 text-sm text-gray-500">
+														{client.summary}
 													</td>
 													<td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
 														<a
@@ -116,7 +125,6 @@ function ClientTable() {
 															className="text-indigo-600 hover:text-indigo-900"
 														>
 															Edit
-															<span className="sr-only">, Lindsay Walton</span>
 														</a>
 													</td>
 												</tr>
@@ -129,6 +137,17 @@ function ClientTable() {
 					</div>
 				</div>
 			</div>
+			<Modal
+				modalTitle="Create client"
+				confirmText="Save"
+				show={clientFormShow}
+				onHide={handleToggleClientForm}
+			>
+				<ClientForm
+					onSubmitAction={handleToggleClientForm}
+					onCancelAction={handleToggleClientForm}
+				/>
+			</Modal>
 		</>
 	);
 }
