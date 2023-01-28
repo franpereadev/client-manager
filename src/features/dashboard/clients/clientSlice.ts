@@ -47,7 +47,8 @@ export const clientSlice = createSlice({
 			state.value.push(action.payload);
 		},
 		updateClientById: (state, action) => {
-			const { id, name, lastName, email, mobile, summary } = action.payload;
+			const { id, name, lastName, email, mobile, summary, show } =
+				action.payload;
 			const foundClient = state.value.find((client) => client.id === id);
 			if (foundClient) {
 				foundClient.name = name;
@@ -55,6 +56,7 @@ export const clientSlice = createSlice({
 				foundClient.email = email;
 				foundClient.mobile = mobile;
 				foundClient.summary = summary;
+				foundClient.show = show;
 			}
 		},
 		deleteClient: (state, action) => {
