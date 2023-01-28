@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
-import Breadcrumb from "../../../shared/components/Breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../shared/components/Breadcrumb";
+import Modal from "../../../shared/components/Modal";
 import ClientForm from "./ClientForm";
 import ClientTable from "./ClientTable";
 
@@ -12,7 +13,6 @@ function Clients() {
 			<div className="rounded bg-white m-5 px-10 py-10">
 				<Breadcrumb />
 				<ClientTable />
-				<ClientForm />
 			</div>
 		</>
 	);

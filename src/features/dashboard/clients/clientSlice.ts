@@ -12,8 +12,8 @@ const initialState: ClientState = {
 		{
 			id: "1",
 			name: "fran",
-			surname: "perea",
-			phone: "3452345234",
+			lastName: "perea",
+			mobile: "3452345234",
 			email: "fran@fran.fran",
 			summary: "hot",
 			show: true,
@@ -21,8 +21,8 @@ const initialState: ClientState = {
 		{
 			id: "2",
 			name: "pedro",
-			surname: "perea",
-			phone: "3452345234",
+			lastName: "perea",
+			mobile: "3452345234",
 			email: "fran@fran.fran",
 			summary: "hot",
 			show: true,
@@ -30,8 +30,8 @@ const initialState: ClientState = {
 		{
 			id: "3",
 			name: "juan",
-			surname: "perea",
-			phone: "3452345234",
+			lastName: "perea",
+			mobile: "3452345234",
 			email: "fran@fran.fran",
 			summary: "hot",
 			show: true,
@@ -47,13 +47,13 @@ export const clientSlice = createSlice({
 			state.value.push(action.payload);
 		},
 		updateClientById: (state, action) => {
-			const { id, name, surname, email, phone, summary } = action.payload;
+			const { id, name, lastName, email, mobile, summary } = action.payload;
 			const foundClient = state.value.find((client) => client.id === id);
 			if (foundClient) {
 				foundClient.name = name;
-				foundClient.surname = surname;
+				foundClient.lastName = lastName;
 				foundClient.email = email;
-				foundClient.phone = phone;
+				foundClient.mobile = mobile;
 				foundClient.summary = summary;
 			}
 		},
