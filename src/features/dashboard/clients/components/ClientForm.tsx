@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createClient } from "../clientSlice";
+import { createClient, updateClientById } from "../clientSlice";
 const { v1: uuidv1 } = require("uuid");
 
 interface IClientFormProps {
 	onSubmitAction: Function;
 	onCancelAction: any;
-} //TODO: close form on submit
+} //TODO: edit/create client depending on props
 function ClientForm(props: IClientFormProps) {
 	const dispatch = useDispatch();
 	const [client, setClient] = useState({
@@ -29,7 +29,11 @@ function ClientForm(props: IClientFormProps) {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		dispatch(createClient({ ...client, id: uuidv1() }));
+		if (client.id) {
+			dispatch(updateClientById({ ...client, id: client.id }));
+		} else {
+			dispatch(createClient({ ...client, id: uuidv1() }));
+		}
 		props.onSubmitAction();
 	};
 	return (
@@ -52,6 +56,7 @@ function ClientForm(props: IClientFormProps) {
 									type="text"
 									name="firstName"
 									placeholder="Jack"
+									value={client.name}
 									onChange={handleChange}
 									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 								/>
@@ -68,6 +73,7 @@ function ClientForm(props: IClientFormProps) {
 									type="text"
 									name="lastName"
 									placeholder="Harlow"
+									value={client.lastName}
 									onChange={handleChange}
 									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 								/>
@@ -84,6 +90,7 @@ function ClientForm(props: IClientFormProps) {
 									type="text"
 									name="mobile"
 									placeholder="+34 656656656"
+									value={client.mobile}
 									onChange={handleChange}
 									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 								/>
@@ -100,6 +107,7 @@ function ClientForm(props: IClientFormProps) {
 									type="text"
 									name="email"
 									placeholder="youngharleezy@gmail.com"
+									value={client.email}
 									onChange={handleChange}
 									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 								/>
@@ -116,6 +124,7 @@ function ClientForm(props: IClientFormProps) {
 										rows={4}
 										name="summary"
 										placeholder="Summary..."
+										value={client.summary}
 										onChange={handleChange}
 										className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 										defaultValue={""}

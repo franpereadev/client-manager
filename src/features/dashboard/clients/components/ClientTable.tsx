@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../app/hooks";
 import Modal from "../../../shared/components/Modal";
 import ToggleButton from "../../../shared/components/ToggleButton";
 import { Client } from "../client";
 import { updateClientById } from "../clientSlice";
 import ClientForm from "./ClientForm";
+//TODO: open editing and creating by routes
 
+//TODO: substitute the edit button for a 3 dots multiple options (delete & edit)
+//TODO: try styling
 function ClientTable() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const params = useParams();
 	const clientState = useAppSelector((state) => state.clients);
 
 	const [clientFormShow, setClientFormShow] = useState(false);
@@ -85,6 +90,7 @@ function ClientTable() {
 									</thead>
 									<tbody className="divide-y divide-gray-200 bg-white">
 										{clientState.value.map((client) => {
+											console.log(client);
 											return (
 												<tr key={client.id}>
 													<td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
