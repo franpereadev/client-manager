@@ -1,9 +1,8 @@
-import Dashboard from "../features/dashboard/Dashboard";
-import Clients from "../features/dashboard/clients/components/Clients";
-import Register from "../features/auth/components/Register";
 import Login from "../features/auth/components/Login";
-import Tasks from "../features/dashboard/tasks/Tasks";
-import Plans from "../features/dashboard/plans/Plans";
+import Register from "../features/auth/components/Register";
+import Clients from "../features/dashboard/clients/components/Clients";
+import Dashboard from "../features/dashboard/Dashboard";
+import Feature from "../features/dashboard/example-feature/components/Feature";
 
 export interface IPageRoute {
 	key: string;
@@ -35,16 +34,9 @@ const pageData: IPageRoute[] = [
 			{
 				index: false,
 				exact: false,
-				key: "tasks",
-				component: <Tasks />,
-				path: "tasks",
-			},
-			{
-				index: false,
-				exact: false,
-				key: "plans",
-				component: <Plans />,
-				path: "plans",
+				key: "feature",
+				component: <Feature />,
+				path: "feature",
 			},
 		],
 	},
