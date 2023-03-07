@@ -56,7 +56,6 @@ function ClientForm(props: IClientFormProps) {
 									type="text"
 									name="firstName"
 									placeholder="Jack"
-									value={client.name}
 									onChange={handleChange}
 									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 								/>
@@ -124,7 +123,6 @@ function ClientForm(props: IClientFormProps) {
 										rows={4}
 										name="summary"
 										placeholder="Summary..."
-										value={client.summary}
 										onChange={handleChange}
 										className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 										defaultValue={""}
