@@ -14,20 +14,14 @@ export interface ISideBarLink {
 const sideBarLinks: ISideBarLink[] = [
 	{
 		icon: UsersIcon,
-		name: "Clientes",
+		name: "Clients",
 		url: "/clients",
 		current: true,
 	},
 	{
 		icon: FireIcon,
-		name: "Tareas",
-		url: "/tasks",
-		current: false,
-	},
-	{
-		icon: FlagIcon,
-		name: "Planes",
-		url: "/plans",
+		name: "Feature",
+		url: "/feature",
 		current: false,
 	},
 ];
